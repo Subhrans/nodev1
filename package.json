@@ -1,0 +1,29 @@
+{
+  "name": "nodev1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Subhrans/nodev1.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Subhrans/nodev1/issues"
+  },
+  "homepage": "https://github.com/Subhrans/nodev1#readme",
+  "dependencies": {
+    "@prisma/client": "^6.3.0",
+    "body-parser": "^1.20.3",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mysql2": "^3.12.0",
+    "prisma": "^6.2.1"
+  }
+}
