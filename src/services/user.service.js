@@ -1,22 +1,25 @@
-// const {prisma} = require('../config/database');
-import { prisma } from '../config/database.js';
+import { AppDataSource } from "../config/ormconfig.js";
+import {User} from '../models/user.js';
 
+const userRepository = AppDataSource.getRepository(User);
 
-const findAllUsers = async () => {
-    return prisma.user.findMany();
+export const findAllUsers = async () => {
+    return userRepository.find();
 };
 
-const findFirstUser = async () =>{
-    return prisma.user.findFirst();
+export const findUserById = async (id) =>{
+    return userRepository.findOneBy({id});
 };
 
-const createUsers = async (userData) =>{
-    return prisma.user.create({
-        data: userData,
-    })
+export const createUsers = async (userData) =>{
+    const user = userRepository.create(userData);
+    return await userRepository.save(user);
 };
 
-export default{
-    findAllUsers, findFirstUser, createUsers
+export const deleteUser = async (id) => {
+    return await userRepository.delete({id});
 }
-// module.exports = {}
+export const updateUser = async (id, userData) =>{
+    await userRepository.update(id, userData);
+    return await findUserById(id);
+}

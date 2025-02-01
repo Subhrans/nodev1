@@ -1,8 +1,6 @@
 import express from 'express';
-import { connectDB } from './config/database.js';
 import userRoutes from './routes/user.routes.js';
-// const { connectDB } = require('./config/database');
-// const userRoutes = require('./routes/user.routes');
+import { AppDataSource } from './config/ormconfig.js';
 
 const app = express();
 
@@ -12,6 +10,13 @@ app.use(express.json());
 app.use('/api/users', userRoutes);
 
 // Connect to DB
-connectDB();
+const PORT = process.env.PORT || 3306;
+
+AppDataSource.initialize()
+    .then(() => {
+        console.log("Database connected!");
+        app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+    })
+    .catch((err) => console.error("Database connection failed:", err));
 
 export default app;
